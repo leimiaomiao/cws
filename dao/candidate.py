@@ -9,15 +9,17 @@ class Candidate(Document):
     left_set = MapField(field=StringField())
     right_set = MapField(field=StringField())
 
-    def rtrv_one(self, **kwargs):
+    @classmethod
+    def rtrv_one(cls, **kwargs):
         try:
-            obj = self.__objects.get(**kwargs)
+            obj = cls.objects.get(**kwargs)
         except DoesNotExist:
             obj = None
         return obj
 
-    def rtrv_all(self, **kwargs):
-        return self.__objects(**kwargs)
+    @classmethod
+    def rtrv_all(cls, **kwargs):
+        return cls.objects(**kwargs)
 
     def inner_solid_degree(self):
         pass
